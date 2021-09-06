@@ -1,10 +1,10 @@
-const expressEjsLayouts = require('express-ejs-layouts');
-
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
+const expressEjsLayouts = require('express-ejs-layouts');
 
 const app = express();
 
@@ -21,10 +21,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Khai báo sửa dụng main_route
-app.use('/', require('./routes'));
-app.use('/users', require('./routes/users'));
+app.use('/admin', require('./routes'));
+app.use('/admin/dashboard', require('./routes/dashboard'));
+app.use('/admin/items', require('./routes/items'));
 app.use('/videos', require('./routes/videos'));
-app.use('/items', require('./routes/items'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
