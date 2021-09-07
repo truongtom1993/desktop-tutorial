@@ -20,11 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Khai báo sửa dụng main_route
-app.use('/admin', require('./routes'));
-app.use('/admin/dashboard', require('./routes/dashboard'));
-app.use('/admin/items', require('./routes/items'));
-app.use('/videos', require('./routes/videos'));
+// Setup router
+app.use('/admin', require('./routes/backend'));
+app.use('/', require('./routes/frontend'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
