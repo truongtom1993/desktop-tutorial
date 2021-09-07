@@ -3,8 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
 const expressEjsLayouts = require('express-ejs-layouts');
+
+const { prefixAdmin } = require('./config/system');
 
 const app = express();
 
@@ -20,8 +21,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Local variable
+app.locals.prefixAdmin = prefixAdmin;
+
 // Setup router
-app.use('/admin', require('./routes/backend'));
+app.use(`/${prefixAdmin}`, require('./routes/backend'));
 app.use('/', require('./routes/frontend'));
 
 // catch 404 and forward to error handler
